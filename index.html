@@ -57,7 +57,7 @@
                 <input type="submit" value="Suchen">
             </form>
         </div>
-        <iframe id="bing-left-results" src="https://www.bing.com" sandbox="allow-scripts allow-same-origin"></iframe>
+        <iframe id="bing-left-results" src="about:blank" sandbox="allow-scripts allow-same-origin"></iframe>
     </div>
 
     <!-- Rechte Seite: Bing -->
@@ -68,16 +68,21 @@
                 <input type="submit" value="Suchen">
             </form>
         </div>
-        <iframe id="bing-right-results" src="https://www.bing.com" sandbox="allow-scripts allow-same-origin"></iframe>
+        <iframe id="bing-right-results" src="about:blank" sandbox="allow-scripts allow-same-origin"></iframe>
     </div>
 
     <script>
+        // Funktion zum Umgehen von CORS-Beschränkungen mit allorigins
+        function proxyUrl(url) {
+            return `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+        }
+
         // Linke Seite: Bing Suche
         function searchBingLeft(event) {
             event.preventDefault();
             var query = document.getElementById("bing-left-query").value;
             var bingUrl = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
-            document.getElementById("bing-left-results").src = bingUrl;
+            document.getElementById("bing-left-results").src = proxyUrl(bingUrl);
         }
 
         // Rechte Seite: Bing Suche
@@ -85,7 +90,7 @@
             event.preventDefault();
             var query = document.getElementById("bing-right-query").value;
             var bingUrl = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
-            document.getElementById("bing-right-results").src = bingUrl;
+            document.getElementById("bing-right-results").src = proxyUrl(bingUrl);
         }
     </script>
 </body>
