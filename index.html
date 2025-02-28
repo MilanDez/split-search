@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bing & DuckDuckGo Suche</title>
+    <title>Split-Screen Suche</title>
     <style>
         body {
             display: flex;
@@ -15,22 +15,26 @@
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
-            padding: 10px;
         }
         form {
             display: flex;
             justify-content: center;
-            margin-bottom: 10px;
+            padding: 10px;
+            background: #f1f1f1;
         }
         input[type="text"] {
             padding: 5px;
-            width: 80%;
+            width: 70%;
             font-size: 16px;
+            margin-right: 5px;
         }
         input[type="submit"] {
             padding: 5px 10px;
             font-size: 16px;
             cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
         }
         iframe {
             width: 100%;
@@ -41,37 +45,37 @@
     </style>
 </head>
 <body>
-    <!-- Linke Seite: Bing Suche -->
+    <!-- Linke Seite: Startpage Suche -->
     <div class="search-container">
-        <form onsubmit="searchBing(event)">
-            <input type="text" id="bing-query" placeholder="Suche mit Bing...">
+        <form onsubmit="searchStartpage(event)">
+            <input type="text" id="startpage-query" placeholder="Suche mit Startpage...">
             <input type="submit" value="Suchen">
         </form>
-        <iframe id="bing-results" src="https://www.bing.com"></iframe>
+        <iframe id="startpage-results" src="https://www.startpage.com"></iframe>
     </div>
 
-    <!-- Rechte Seite: DuckDuckGo Suche -->
+    <!-- Rechte Seite: Ecosia Suche -->
     <div class="search-container">
-        <form onsubmit="searchDuckDuckGo(event)">
-            <input type="text" id="duck-query" placeholder="Suche mit DuckDuckGo...">
+        <form onsubmit="searchEcosia(event)">
+            <input type="text" id="ecosia-query" placeholder="Suche mit Ecosia...">
             <input type="submit" value="Suchen">
         </form>
-        <iframe id="duck-results" src="https://duckduckgo.com"></iframe>
+        <iframe id="ecosia-results" src="https://www.ecosia.org"></iframe>
     </div>
 
     <script>
-        function searchBing(event) {
+        function searchStartpage(event) {
             event.preventDefault();
-            var query = document.getElementById("bing-query").value;
-            var bingUrl = "https://www.bing.com/search?q=" + encodeURIComponent(query);
-            document.getElementById("bing-results").src = bingUrl;
+            var query = document.getElementById("startpage-query").value;
+            var startpageUrl = "https://www.startpage.com/do/dsearch?query=" + encodeURIComponent(query);
+            document.getElementById("startpage-results").src = startpageUrl;
         }
 
-        function searchDuckDuckGo(event) {
+        function searchEcosia(event) {
             event.preventDefault();
-            var query = document.getElementById("duck-query").value;
-            var duckUrl = "https://duckduckgo.com/?q=" + encodeURIComponent(query);
-            document.getElementById("duck-results").src = duckUrl;
+            var query = document.getElementById("ecosia-query").value;
+            var ecosiaUrl = "https://www.ecosia.org/search?q=" + encodeURIComponent(query);
+            document.getElementById("ecosia-results").src = ecosiaUrl;
         }
     </script>
 </body>
