@@ -51,37 +51,37 @@
     </style>
 </head>
 <body>
-    <!-- Linke Seite: DuckDuckGo Suche -->
+    <!-- Linke Seite: Bing Suche -->
     <div class="search-container">
-        <form onsubmit="searchDuckDuckGo(event)">
-            <input type="text" id="duckduckgo-query" placeholder="Suche mit DuckDuckGo...">
+        <form onsubmit="searchBing(event)">
+            <input type="text" id="bing-query" placeholder="Suche mit Bing...">
             <input type="submit" value="Suchen">
         </form>
-        <iframe id="duckduckgo-results" src="https://duckduckgo.com" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+        <iframe id="bing-results" src="https://www.bing.com" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
     </div>
 
-    <!-- Rechte Seite: Brave Suche -->
+    <!-- Rechte Seite: Metager Suche -->
     <div class="search-container">
-        <form onsubmit="searchBrave(event)">
-            <input type="text" id="brave-query" placeholder="Suche mit Brave...">
+        <form onsubmit="searchMetager(event)">
+            <input type="text" id="metager-query" placeholder="Suche mit Metager...">
             <input type="submit" value="Suchen">
         </form>
-        <iframe id="brave-results" src="https://search.brave.com" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+        <iframe id="metager-results" src="https://metager.org" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
     </div>
 
     <script>
-        function searchDuckDuckGo(event) {
+        function searchBing(event) {
             event.preventDefault();
-            var query = document.getElementById("duckduckgo-query").value;
-            var duckduckgoUrl = "https://duckduckgo.com/?q=" + encodeURIComponent(query);
-            document.getElementById("duckduckgo-results").src = duckduckgoUrl;
+            var query = document.getElementById("bing-query").value;
+            var bingUrl = "https://www.bing.com/search?q=" + encodeURIComponent(query);
+            document.getElementById("bing-results").src = bingUrl;
         }
 
-        function searchBrave(event) {
+        function searchMetager(event) {
             event.preventDefault();
-            var query = document.getElementById("brave-query").value;
-            var braveUrl = "https://search.brave.com/search?q=" + encodeURIComponent(query);
-            document.getElementById("brave-results").src = braveUrl;
+            var query = document.getElementById("metager-query").value;
+            var metagerUrl = "https://metager.org/meta/meta.ger3?eingabe=" + encodeURIComponent(query);
+            document.getElementById("metager-results").src = metagerUrl;
         }
     </script>
 </body>
