@@ -51,37 +51,37 @@
     </style>
 </head>
 <body>
-    <!-- Linke Seite: Startpage Suche -->
+    <!-- Linke Seite: DuckDuckGo Suche -->
     <div class="search-container">
-        <form onsubmit="searchStartpage(event)">
-            <input type="text" id="startpage-query" placeholder="Suche mit Startpage...">
+        <form onsubmit="searchDuckDuckGo(event)">
+            <input type="text" id="duckduckgo-query" placeholder="Suche mit DuckDuckGo...">
             <input type="submit" value="Suchen">
         </form>
-        <iframe id="startpage-results" src="https://www.startpage.com" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+        <iframe id="duckduckgo-results" src="https://duckduckgo.com" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
     </div>
 
-    <!-- Rechte Seite: Ecosia Suche -->
+    <!-- Rechte Seite: Brave Suche -->
     <div class="search-container">
-        <form onsubmit="searchEcosia(event)">
-            <input type="text" id="ecosia-query" placeholder="Suche mit Ecosia...">
+        <form onsubmit="searchBrave(event)">
+            <input type="text" id="brave-query" placeholder="Suche mit Brave...">
             <input type="submit" value="Suchen">
         </form>
-        <iframe id="ecosia-results" src="https://www.ecosia.org" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+        <iframe id="brave-results" src="https://search.brave.com" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
     </div>
 
     <script>
-        function searchStartpage(event) {
+        function searchDuckDuckGo(event) {
             event.preventDefault();
-            var query = document.getElementById("startpage-query").value;
-            var startpageUrl = "https://www.startpage.com/do/dsearch?query=" + encodeURIComponent(query);
-            document.getElementById("startpage-results").src = startpageUrl;
+            var query = document.getElementById("duckduckgo-query").value;
+            var duckduckgoUrl = "https://duckduckgo.com/?q=" + encodeURIComponent(query);
+            document.getElementById("duckduckgo-results").src = duckduckgoUrl;
         }
 
-        function searchEcosia(event) {
+        function searchBrave(event) {
             event.preventDefault();
-            var query = document.getElementById("ecosia-query").value;
-            var ecosiaUrl = "https://www.ecosia.org/search?q=" + encodeURIComponent(query);
-            document.getElementById("ecosia-results").src = ecosiaUrl;
+            var query = document.getElementById("brave-query").value;
+            var braveUrl = "https://search.brave.com/search?q=" + encodeURIComponent(query);
+            document.getElementById("brave-results").src = braveUrl;
         }
     </script>
 </body>
