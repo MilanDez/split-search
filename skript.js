@@ -1,41 +1,27 @@
-function searchBing(event) {
+// Yahoo Suche (über SerpApi)
+function searchYahoo(event) {
     event.preventDefault();
-    var query = document.getElementById("bing-query").value;
-    var bingUrl = "https://www.bing.com/search?q=" + encodeURIComponent(query);
-    var bingIframe = document.getElementById("bing-iframe");
-    bingIframe.src = bingUrl;
+    var query = document.getElementById("yahoo-query").value;
+    var apiKey = "HIER_DEIN_SERPAPI_SCHLUESSEL";
+    var url = `https://serpapi-yahoo-search.p.rapidapi.com/search?q=${encodeURIComponent(query)}&location=de`;
 
-    // Event Listener für Link-Klicks
-    bingIframe.onload = function() {
-        // Manipulation aller Links, um sie im gleichen iframe zu öffnen
-        var links = bingIframe.contentWindow.document.querySelectorAll('a');
-        links.forEach(function(link) {
-            link.setAttribute('target', '_self');
-            link.onclick = function(e) {
-                e.preventDefault();
-                bingIframe.src = link.href;
-            };
+    fetch(url, {
+        method: "GET",
+        headers: {
+            "X-RapidAPI-Host": "serpapi-yahoo-search.p.rapidapi.com",
+            "X-RapidAPI-Key": apiKey
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        var resultsDiv = document.getElementById("yahoo-results");
+        resultsDiv.innerHTML = '';
+        data.organic_results.forEach(item => {
+            var result = `<a href="${item.link}" target="_blank">${item.title}</a><p>${item.snippet}</p>`;
+            resultsDiv.innerHTML += result;
         });
-    };
-}
-
-function searchMetager(event) {
-    event.preventDefault();
-    var query = document.getElementById("metager-query").value;
-    var metagerUrl = "https://metager.org/meta/meta.ger3?eingabe=" + encodeURIComponent(query);
-    var metagerIframe = document.getElementById("metager-iframe");
-    metagerIframe.src = metagerUrl;
-
-    // Event Listener für Link-Klicks
-    metagerIframe.onload = function() {
-        // Manipulation aller Links, um sie im gleichen iframe zu öffnen
-        var links = metagerIframe.contentWindow.document.querySelectorAll('a');
-        links.forEach(function(link) {
-            link.setAttribute('target', '_self');
-            link.onclick = function(e) {
-                e.preventDefault();
-                metagerIframe.src = link.href;
-            };
-        });
-    };
+    })
+    .catch(error => {
+        console.error('Fehler bei Yahoo Suche:', error);
+    });
 }
