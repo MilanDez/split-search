@@ -3,60 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Split-Screen Suche - Bing und Yahoo</title>
+    <title>Split-Screen Suche - Bing & Bing</title>
     <style>
         body {
             margin: 0;
             display: flex;
             height: 100vh;
             font-family: Arial, sans-serif;
-            background: #f4f4f9;
         }
         .container {
             width: 50%;
             display: flex;
             flex-direction: column;
-            align-items: center;
-        }
-        .frame {
-            width: 100%;
-            height: calc(100% - 80px); /* Höhe minus Suchfeld */
-            border: none;
+            border: 1px solid #e0e0e0;
+            box-sizing: border-box;
         }
         .search-bar {
-            width: 100%;
-            background: #fff;
-            padding: 15px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            text-align: center;
+            padding: 10px;
+            background: #f4f4f9;
         }
         .search-bar form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: inline-flex;
+            gap: 10px;
         }
         input[type="text"] {
-            width: 60%;
-            padding: 8px;
+            width: 70%;
+            padding: 5px;
             font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-right: 10px;
         }
         input[type="submit"] {
-            padding: 8px 15px;
+            padding: 5px 10px;
             font-size: 16px;
-            border: none;
+            cursor: pointer;
             background: #4CAF50;
             color: white;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
+            border: none;
+            border-radius: 5px;
         }
-        input[type="submit"]:hover {
-            background: #45a049;
+        iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
         }
     </style>
 </head>
@@ -64,40 +52,40 @@
     <!-- Linke Seite: Bing -->
     <div class="container">
         <div class="search-bar">
-            <form onsubmit="searchBing(event)">
-                <input type="text" id="bing-query" placeholder="Suche mit Bing...">
+            <form onsubmit="searchBingLeft(event)">
+                <input type="text" id="bing-left-query" placeholder="Suche mit Bing...">
                 <input type="submit" value="Suchen">
             </form>
         </div>
-        <iframe id="bing-results" class="frame" src="https://www.bing.com"></iframe>
+        <iframe id="bing-left-results" src="https://www.bing.com" sandbox="allow-scripts allow-same-origin"></iframe>
     </div>
 
-    <!-- Rechte Seite: Yahoo -->
+    <!-- Rechte Seite: Bing -->
     <div class="container">
         <div class="search-bar">
-            <form onsubmit="searchYahoo(event)">
-                <input type="text" id="yahoo-query" placeholder="Suche mit Yahoo...">
+            <form onsubmit="searchBingRight(event)">
+                <input type="text" id="bing-right-query" placeholder="Suche mit Bing...">
                 <input type="submit" value="Suchen">
             </form>
         </div>
-        <iframe id="yahoo-results" class="frame" src="https://search.yahoo.com"></iframe>
+        <iframe id="bing-right-results" src="https://www.bing.com" sandbox="allow-scripts allow-same-origin"></iframe>
     </div>
 
     <script>
-        // Bing Suche
-        function searchBing(event) {
+        // Linke Seite: Bing Suche
+        function searchBingLeft(event) {
             event.preventDefault();
-            var query = document.getElementById("bing-query").value;
+            var query = document.getElementById("bing-left-query").value;
             var bingUrl = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
-            document.getElementById("bing-results").src = bingUrl;
+            document.getElementById("bing-left-results").src = bingUrl;
         }
 
-        // Yahoo Suche
-        function searchYahoo(event) {
+        // Rechte Seite: Bing Suche
+        function searchBingRight(event) {
             event.preventDefault();
-            var query = document.getElementById("yahoo-query").value;
-            var yahooUrl = `https://search.yahoo.com/search?p=${encodeURIComponent(query)}`;
-            document.getElementById("yahoo-results").src = yahooUrl;
+            var query = document.getElementById("bing-right-query").value;
+            var bingUrl = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
+            document.getElementById("bing-right-results").src = bingUrl;
         }
     </script>
 </body>
