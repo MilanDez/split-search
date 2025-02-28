@@ -41,7 +41,7 @@
             color: white;
             border: none;
         }
-        iframe {
+        .webview {
             width: 100%;
             height: 100%;
             border: none;
@@ -51,39 +51,57 @@
     </style>
 </head>
 <body>
-    <!-- Linke Seite: Bing Suche mit Proxy -->
+    <!-- Linke Seite: Bing Suche -->
     <div class="search-container">
         <form onsubmit="searchBing(event)">
             <input type="text" id="bing-query" placeholder="Suche mit Bing...">
             <input type="submit" value="Suchen">
         </form>
-        <iframe id="bing-results"></iframe>
+        <div class="webview" id="bing-view">
+            <iframe id="bing-iframe" src="https://www.bing.com" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
     </div>
 
-    <!-- Rechte Seite: Metager Suche mit Proxy -->
+    <!-- Rechte Seite: Metager Suche -->
     <div class="search-container">
         <form onsubmit="searchMetager(event)">
             <input type="text" id="metager-query" placeholder="Suche mit Metager...">
             <input type="submit" value="Suchen">
         </form>
-        <iframe id="metager-results"></iframe>
+        <div class="webview" id="metager-view">
+            <iframe id="metager-iframe" src="https://metager.org" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
     </div>
 
     <script>
         function searchBing(event) {
             event.preventDefault();
             var query = document.getElementById("bing-query").value;
-            var proxyUrl = "https://api.allorigins.win/raw?url=";
             var bingUrl = "https://www.bing.com/search?q=" + encodeURIComponent(query);
-            document.getElementById("bing-results").src = proxyUrl + encodeURIComponent(bingUrl);
+            var bingIframe = document.getElementById("bing-iframe");
+            bingIframe.src = bingUrl;
+
+            // Event Listener für Link-Klicks
+            bingIframe.onload = function() {
+                bingIframe.contentWindow.document.querySelectorAll('a').forEach(function(link) {
+                    link.setAttribute('target', '_self');
+                });
+            };
         }
 
         function searchMetager(event) {
             event.preventDefault();
             var query = document.getElementById("metager-query").value;
-            var proxyUrl = "https://api.allorigins.win/raw?url=";
             var metagerUrl = "https://metager.org/meta/meta.ger3?eingabe=" + encodeURIComponent(query);
-            document.getElementById("metager-results").src = proxyUrl + encodeURIComponent(metagerUrl);
+            var metagerIframe = document.getElementById("metager-iframe");
+            metagerIframe.src = metagerUrl;
+
+            // Event Listener für Link-Klicks
+            metagerIframe.onload = function() {
+                metagerIframe.contentWindow.document.querySelectorAll('a').forEach(function(link) {
+                    link.setAttribute('target', '_self');
+                });
+            };
         }
     </script>
 </body>
