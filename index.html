@@ -51,37 +51,39 @@
     </style>
 </head>
 <body>
-    <!-- Linke Seite: Bing Suche -->
+    <!-- Linke Seite: Bing Suche mit Proxy -->
     <div class="search-container">
         <form onsubmit="searchBing(event)">
             <input type="text" id="bing-query" placeholder="Suche mit Bing...">
             <input type="submit" value="Suchen">
         </form>
-        <iframe id="bing-results" src="https://www.bing.com" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+        <iframe id="bing-results"></iframe>
     </div>
 
-    <!-- Rechte Seite: Metager Suche -->
+    <!-- Rechte Seite: Metager Suche mit Proxy -->
     <div class="search-container">
         <form onsubmit="searchMetager(event)">
             <input type="text" id="metager-query" placeholder="Suche mit Metager...">
             <input type="submit" value="Suchen">
         </form>
-        <iframe id="metager-results" src="https://metager.org" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+        <iframe id="metager-results"></iframe>
     </div>
 
     <script>
         function searchBing(event) {
             event.preventDefault();
             var query = document.getElementById("bing-query").value;
+            var proxyUrl = "https://api.allorigins.win/raw?url=";
             var bingUrl = "https://www.bing.com/search?q=" + encodeURIComponent(query);
-            document.getElementById("bing-results").src = bingUrl;
+            document.getElementById("bing-results").src = proxyUrl + encodeURIComponent(bingUrl);
         }
 
         function searchMetager(event) {
             event.preventDefault();
             var query = document.getElementById("metager-query").value;
+            var proxyUrl = "https://api.allorigins.win/raw?url=";
             var metagerUrl = "https://metager.org/meta/meta.ger3?eingabe=" + encodeURIComponent(query);
-            document.getElementById("metager-results").src = metagerUrl;
+            document.getElementById("metager-results").src = proxyUrl + encodeURIComponent(metagerUrl);
         }
     </script>
 </body>
