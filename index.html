@@ -1,9 +1,76 @@
-<!-- Yahoo Suche -->
-<div>
-    <h2>Yahoo Suche</h2>
-    <form onsubmit="searchYahoo(event)">
-        <input type="text" id="yahoo-query" placeholder="Suche mit Yahoo...">
-        <input type="submit" value="Suchen">
-    </form>
-    <div id="yahoo-results"></div>
-</div>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split-Screen Suche - Bing und Yahoo</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .frame {
+            width: 50%;
+            height: 100%;
+            border: none;
+        }
+        .search-bar {
+            text-align: center;
+            padding: 10px;
+            background: #f4f4f9;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Linke Seite: Bing -->
+    <div>
+        <div class="search-bar">
+            <form onsubmit="searchBing(event)">
+                <input type="text" id="bing-query" placeholder="Suche mit Bing...">
+                <input type="submit" value="Suchen">
+            </form>
+        </div>
+        <iframe id="bing-results" class="frame" src="https://www.bing.com"></iframe>
+    </div>
+
+    <!-- Rechte Seite: Yahoo -->
+    <div>
+        <div class="search-bar">
+            <form onsubmit="searchYahoo(event)">
+                <input type="text" id="yahoo-query" placeholder="Suche mit Yahoo...">
+                <input type="submit" value="Suchen">
+            </form>
+        </div>
+        <iframe id="yahoo-results" class="frame" src="https://search.yahoo.com"></iframe>
+    </div>
+
+    <script>
+        // Bing Suche
+        function searchBing(event) {
+            event.preventDefault();
+            var query = document.getElementById("bing-query").value;
+            var bingUrl = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
+            document.getElementById("bing-results").src = bingUrl;
+        }
+
+        // Yahoo Suche
+        function searchYahoo(event) {
+            event.preventDefault();
+            var query = document.getElementById("yahoo-query").value;
+            var yahooUrl = `https://search.yahoo.com/search?p=${encodeURIComponent(query)}`;
+            document.getElementById("yahoo-results").src = yahooUrl;
+        }
+    </script>
+</body>
+</html>
