@@ -1,30 +1,9 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Split-Screen Suche</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Linke Seite: Bing Suche -->
-    <div class="search-container">
-        <form onsubmit="searchBing(event)">
-            <input type="text" id="bing-query" placeholder="Suche mit Bing...">
-            <input type="submit" value="Suchen">
-        </form>
-        <iframe id="bing-iframe" src="https://www.bing.com"></iframe>
-    </div>
-
-    <!-- Rechte Seite: Metager Suche -->
-    <div class="search-container">
-        <form onsubmit="searchMetager(event)">
-            <input type="text" id="metager-query" placeholder="Suche mit Metager...">
-            <input type="submit" value="Suchen">
-        </form>
-        <iframe id="metager-iframe" src="https://metager.org"></iframe>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<!-- Yahoo Suche -->
+<div>
+    <h2>Yahoo Suche</h2>
+    <form onsubmit="searchYahoo(event)">
+        <input type="text" id="yahoo-query" placeholder="Suche mit Yahoo...">
+        <input type="submit" value="Suchen">
+    </form>
+    <div id="yahoo-results"></div>
+</div>
